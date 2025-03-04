@@ -1,25 +1,40 @@
+import java.util.Scanner;
 public class Ntimes {
     public static void main(String[] args) {
-        String str = "t6hj7ui";
-        StringBuilder result = new StringBuilder();
+      
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your text: ");
+        String input = scanner.nextLine(); 
+        scanner.close(); 
+        
+        String output = expandText(input); 
+        System.out.println("Expanded Output: " + output); 
+    }
 
-        for (int i = 0; i < str.length(); i++) {
-            char ch = str.charAt(i);
+    public static String expandText(String input) {
+        StringBuilder result = new StringBuilder(); 
+        StringBuilder tempText = new StringBuilder(); 
+        
+        for (int i = 0; i < input.length(); i++) {
+            char ch = input.charAt(i); 
 
             if (Character.isLetter(ch)) {
-                result.append(ch);
+                tempText.append(ch); 
             } else if (Character.isDigit(ch)) {
-                int count = Character.getNumericValue(ch);
-                if (result.length() > 0) {
-                    char prevChar = result.charAt(result.length() - 1);
-
-                    for (int j = 1; j < count; j++) {
-                        result.append(prevChar);
-                    }
+                int repeatCount = Character.getNumericValue(ch); 
+ 
+                for (int j = 0; j < repeatCount; j++) {
+                    result.append(tempText);
                 }
+                tempText.setLength(0); 
             }
         }
+        
+        result.append(tempText);
 
-        System.out.print(result.toString());
+        return result.toString(); 
     }
 }
+
+
+
